@@ -68,6 +68,27 @@ app.put("/api/products/:id", (req, res) => {
   }
 });
 
+// @desc Delete a product
+// @route DELETE /api/products/:id
+app.delete("/api/products/:id", (req, res) => {
+  const product = products.find((p) => p.id === req.params.id);
+
+  if (!product) {
+    res.writeHead(404, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ message: "Product not found" }));
+  } else {
+    products.splice(
+      products.findIndex((p) => p.id === req.params.id),
+      1
+    );
+
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(
+      JSON.stringify({ message: `Product with id ${req.params.id} deleted` })
+    );
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
