@@ -11,6 +11,20 @@ app.get("/api/products", (req, res) => {
   res.end(JSON.stringify(products));
 });
 
+// @desc Get a single product
+// @route GET /api/products/:id
+app.get("/api/products", (req, res) => {
+  const product = products.find((p) => p.id === req.params.id);
+
+  if (!product) {
+    res.writeHead(404, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ message: "Product not found" }));
+  } else {
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(product));
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
