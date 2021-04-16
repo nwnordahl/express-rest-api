@@ -44,6 +44,30 @@ app.post("/api/products", (req, res) => {
   res.end(JSON.stringify(product));
 });
 
+// @desc Update a product
+// @route PUT /api/products/:id
+app.put("/api/products/:id", (req, res) => {
+  const product = products.find((p) => p.id === req.params.id);
+
+  if (!product) {
+    res.writeHead(404, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ message: "Product not found" }));
+  } else {
+    const index = products.findIndex((p) => p.id === req.params.id);
+    const newProduct = {
+      id: product.id,
+      name: req.body.name || product.name,
+      description: req.body.description || product.description,
+      price: req.body.price || product.price,
+    };
+
+    products[index] = newProduct;
+
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(newProduct));
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
