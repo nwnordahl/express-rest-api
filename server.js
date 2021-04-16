@@ -1,5 +1,6 @@
 const products = require("./data/products");
 const uuid = require("uuid");
+const { writeToFile } = require("./utils");
 const express = require("express");
 const app = express();
 
@@ -40,6 +41,7 @@ app.post("/api/products", (req, res) => {
   };
   products.push(product);
 
+  writeToFile("./data/products.json", products);
   res.writeHead(200, { "Content-Type": "application/json" });
   res.end(JSON.stringify(product));
 });
@@ -63,6 +65,7 @@ app.put("/api/products/:id", (req, res) => {
 
     products[index] = newProduct;
 
+    writeToFile("./data/products.json", products);
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(newProduct));
   }
@@ -82,6 +85,7 @@ app.delete("/api/products/:id", (req, res) => {
       1
     );
 
+    writeToFile("./data/products.json", products);
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(
       JSON.stringify({ message: `Product with id ${req.params.id} deleted` })
