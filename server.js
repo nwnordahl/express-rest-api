@@ -13,7 +13,7 @@ app.get("/api/products", (req, res) => {
 
 // @desc Get a single product
 // @route GET /api/products/:id
-app.get("/api/products", (req, res) => {
+app.get("/api/products/:id", (req, res) => {
   const product = products.find((p) => p.id === req.params.id);
 
   if (!product) {
