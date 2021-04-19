@@ -1,23 +1,41 @@
+// Get all products
+
 GET http://localhost:5000/api/products HTTP/1.1
 
 ###
+
+// Get product with id 1
 
 GET http://localhost:5000/api/products/1 HTTP/1.1
 
 ###
 
+// Post a new product
+
 POST http://localhost:5000/api/products HTTP/1.1
 content-type: application/json
 
 {
-    "name": "test",
-    "description": "this is a test",
+    "name": "Product",
+    "description": "This is a product",
     "price": 100
 }
+
+###
+
+// Update product with id 1
 
 PUT http://localhost:5000/api/products/1 HTTP/1.1
 content-type: application/json
 
 {
-    
+    "name": "Modified Product",
+    "description": "This product has been modified",
+    "price": 123
 }
+
+###
+
+// Delete product with id 1
+
+DELETE http://localhost:5000/api/products/1 HTTP/1.1
