@@ -33,7 +33,7 @@ $ npm i
 $ npm run dev
 ```
 
-If you see 'Server running on port 5000' in the terminal then you are good to go!
+If you see 'Server running on port 5000' in the terminal you are good to go!
 
 ## How to use
 
